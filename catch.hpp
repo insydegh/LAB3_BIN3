@@ -4301,7 +4301,7 @@ namespace Generators {
                 m_chunk.push_back(m_generator.get());
                 for (size_t i = 1; i < m_chunk_size; ++i) {
                     if (!m_generator.next()) {
-                        Catch::throw_exception(GeneratorException("Not enough values to initialize the first chunk"));
+                        Catch::throw_exception(GeneratorException("Not enough values to initialize the Inorder chunk"));
                     }
                     m_chunk.push_back(m_generator.get());
                 }
