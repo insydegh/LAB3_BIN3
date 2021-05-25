@@ -119,7 +119,7 @@ template<typename T> BinTree<T> BinTree<T>::Map(T (*func)(T)) {
     BinTree<T>* binTree = new BinTree();
     vector<T>* array = new vector<T>();
     mapp(array, root, func);
-    sort(array->хbegin(), array->end(), compare<T>);
+    sort(array->begin(), array->end(), compare<T>);
     array->erase(unique(array->begin(), array->end()),array->end());
     Inorder(binTree, *array, 0, array->size() - 1);
     return *binTree;
