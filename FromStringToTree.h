@@ -19,6 +19,16 @@ operator<(const complex<_Tp>& __x, const complex<_Tp>& __y) {
         return false;
     }
 }
+template<typename _Tp>
+inline _GLIBCXX_CONSTEXPR bool
+operator<=(const complex<_Tp>& __x, const complex<_Tp>& __y) {
+    if (pow(__x.real(),2)+pow(__x.imag(),2) <= pow(__y.real(),2)+pow(__y.imag(),2)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 template<typename _Tp>
 inline _GLIBCXX_CONSTEXPR bool
@@ -31,6 +41,17 @@ operator>(const complex<_Tp>& __x, const complex<_Tp>& __y) {
     }
 }
 
+
+template<typename _Tp>
+inline _GLIBCXX_CONSTEXPR bool
+operator>=(const complex<_Tp>& __x, const complex<_Tp>& __y) {
+    if (pow(__x.real(),2)+pow(__x.imag(),2) >= pow(__y.real(),2)+pow(__y.imag(),2)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 //TO STRING
 template <typename T>
 bool compare(T a, T b)

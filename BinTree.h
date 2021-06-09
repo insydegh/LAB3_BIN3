@@ -162,7 +162,8 @@ template<typename T> void BinTree<T>::Remove(T key) {
 }
 
 //FIND
-template<typename T> bool BinTree<T>::Find(T key) {
+template<typename T>
+bool BinTree<T>::Find(T key) {
     if (!root) {
         cout << "Tree doesn't exist" <<endl;
         return false;

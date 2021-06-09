@@ -1,10 +1,10 @@
 //
 // Created by fokus on 16.05.2021.
-/*
+
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "BinTree.h"
+#include "Menu.h"
 
 //create a tree
 BinTree<int> maketree(){
@@ -21,7 +21,7 @@ BinTree<int> maketree(){
     return tree;
 }
 
-//
+
 int double_number(int x) {
     return x*2;
 }
@@ -55,7 +55,7 @@ TEST_CASE("ADD") {
           45
 
     */
-/*
+
     REQUIRE(GetKey(tree.give_root())==50);
     REQUIRE(GetKey(tree.give_root()->left)==45);
     REQUIRE(GetKey(tree.give_root()->right)==55);
@@ -77,7 +77,7 @@ TEST_CASE("ADD") {
           45
 
     */
-/*
+
     REQUIRE(tree.find_branch(77)->left->key==60);
 }
 
@@ -96,7 +96,7 @@ TEST_CASE("REMOVE") {
           45
 
      */
-/*
+
     REQUIRE(tree.give_root()->right->key==77);
     REQUIRE(tree.give_root()->right->left->key==53);
 }
@@ -146,29 +146,29 @@ TEST_CASE("REDUCE") {
 TEST_CASE("THREADING AND TO STRING") {
     BinTree<int> tree = maketree();
     SECTION("NLR") {
-        REQUIRE(tree.toString("NLR")=="(0, 50), (1, 45), (2, 48), (3, 55), (4, 53), (5, 77), (6, 90), (7, 100), (8, 110)");
+        REQUIRE(tree.toString("NLR")=="50 45 48 55 53 77 90 100 110");
     }
     SECTION("NRL") {
-        REQUIRE(tree.toString("NRL")=="(0, 50), (1, 55), (2, 77), (3, 90), (4, 100), (5, 110), (6, 53), (7, 45), (8, 48)");
+        REQUIRE(tree.toString("NRL")=="50 55 77 90 100 110 53 45 48");
     }
     SECTION("RNL") {
-        REQUIRE(tree.toString("RNL")=="(0, 110), (1, 100), (2, 90), (3, 77), (4, 55), (5, 53), (6, 50), (7, 48), (8, 45)");
+        REQUIRE(tree.toString("RNL")=="110 100 90 77 55 53 50 48 45");
     }
     SECTION("RLN") {
-        REQUIRE(tree.toString("RLN")=="(0, 110), (1, 100), (2, 90), (3, 77), (4, 53), (5, 55), (6, 48), (7, 45), (8, 50)");
+        REQUIRE(tree.toString("RLN")=="110 100 90 77 53 55 48 45 50");
     }
     SECTION("LNR") {
-        REQUIRE(tree.toString("LNR")=="(0, 45), (1, 48), (2, 50), (3, 53), (4, 55), (5, 77), (6, 90), (7, 100), (8, 110)");
+        REQUIRE(tree.toString("LNR")=="45 48 50 53 55 77 90 100 110");
     }
     SECTION("LRN") {
-        REQUIRE(tree.toString("LRN")=="(0, 48), (1, 45), (2, 53), (3, 110), (4, 100), (5, 90), (6, 77), (7, 55), (8, 50)");
+        REQUIRE(tree.toString("LRN")=="48 45 53 110 100 90 77 55 50");
     }
 }
 
 TEST_CASE("BALANCING") {
     BinTree<int> tree = maketree();
     REQUIRE(tree.IsBalanced()==0);
-    tree.Balancing();
+    tree.newBalancing();
     REQUIRE(tree.IsBalanced()==1);
     /*
                    110
@@ -181,7 +181,7 @@ TEST_CASE("BALANCING") {
                48
                     45
      */
-/*
+
 }
 
 TEST_CASE("GET SUB TREE") {
@@ -215,11 +215,60 @@ TEST_CASE("FROM STRING ") {
     REQUIRE(tree.toString("NLR")==NRL);
 
 
-    string RLN = "2 4 3 7 9 8 5";
-    tree = toTree<int>(RLN, "LRN");
-    REQUIRE(tree.toString("LRN")==RLN);
+    string LRN = "2 4 3 7 9 8 5";
+    tree = toTree<int>(LRN, "LRN");
+    REQUIRE(tree.toString("LRN")==LRN);
+}
 
+TEST_CASE("Z_HEAP_ADD") {
+    Heap<int> heap = Heap<int>();
+    heap.insertNode(23);
+    heap.insertNode(56);
+    heap.insertNode(33);
+    heap.insertNode(21);
+    heap.insertNode(78);
+    heap.insertNode(2);
+    REQUIRE(heap.find_array(0)==78);
+    REQUIRE(heap.find_array(1)==56);
+    REQUIRE(heap.find_array(2)==33);
+    REQUIRE(heap.find_array(3)==21);
+    REQUIRE(heap.find_array(4)==23);
+    heap.insertNode(55);
+    REQUIRE(heap.find_array(2)==55);
+    REQUIRE(heap.find_array(1)==56);
+    REQUIRE(heap.find_array(3)==21);
+    heap.insertNode(100);
+    REQUIRE(heap.find_array(0)==100);
+    REQUIRE(heap.find_array(1)==78);
+    REQUIRE(heap.find_array(2)==55);
+}
 
+TEST_CASE("Z_HEAP_REMOVE") {
+    Heap<int> heap = Heap<int>();
+    heap.insertNode(23);
+    heap.insertNode(56);
+    heap.insertNode(33);
+    heap.insertNode(21);
+    heap.insertNode(78);
+    heap.insertNode(2);
+    heap.removeByNumber(78);
+    REQUIRE(heap.find_array(0)==56);
+    REQUIRE(heap.find_array(1)==23);
+    heap.removeByIndex(2);
+    REQUIRE(heap.find_array(2)==2);
 
 }
-*/
+
+TEST_CASE("Z_HEAP FIND") {
+    Heap<int> heap = Heap<int>();
+    heap.insertNode(23);
+    heap.insertNode(56);
+    heap.insertNode(33);
+    heap.insertNode(21);
+    heap.insertNode(78);
+    heap.insertNode(2);
+    REQUIRE(heap.find_bool(23)==true);
+    REQUIRE(heap.find_bool(56)==true);
+    REQUIRE(heap.find_bool(122)==false);
+
+}

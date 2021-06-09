@@ -9822,7 +9822,7 @@ namespace Catch {
                 ["-i"]["--invisibles"]
                 ( "show invisibles (tabs, newlines)" )
             | Opt( config.outputFilename, "filename" )
-                ["-o"]["--out"]
+                ["-o"]["--PrintArray"]
                 ( "output filename" )
             | Opt( setReporter, "name" )
                 ["-r"]["--reporter"]
@@ -16918,7 +16918,7 @@ namespace Catch {
         for( auto const& child : groupNode.children )
             writeTestCase( *child );
 
-        xml.scopedElement( "system-out" ).writeText( trim( stdOutForSuite ), XmlFormatting::Newline );
+        xml.scopedElement( "system-PrintArray" ).writeText( trim( stdOutForSuite ), XmlFormatting::Newline );
         xml.scopedElement( "system-err" ).writeText( trim( stdErrForSuite ), XmlFormatting::Newline );
     }
 
@@ -16973,7 +16973,7 @@ namespace Catch {
             writeAssertions( sectionNode );
 
             if( !sectionNode.stdOut.empty() )
-                xml.scopedElement( "system-out" ).writeText( trim( sectionNode.stdOut ), XmlFormatting::Newline );
+                xml.scopedElement( "system-PrintArray" ).writeText( trim( sectionNode.stdOut ), XmlFormatting::Newline );
             if( !sectionNode.stdErr.empty() )
                 xml.scopedElement( "system-err" ).writeText( trim( sectionNode.stdErr ), XmlFormatting::Newline );
         }

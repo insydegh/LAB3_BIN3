@@ -21,3 +21,5 @@ void Find_tree_test();
 void Remove_list_teest();
 void Remove_tree_test();
 
+void heap_add();
+void heap_find();

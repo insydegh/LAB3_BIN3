@@ -7,7 +7,7 @@
 
 #endif //TREE_MENU_H
 #include "FromStringToTree.h"
-
+#include "BinHeap.h"
 template<typename T>
 T fmap(T x);
 
@@ -24,4 +24,10 @@ void sep();
 template<typename T>
 BinTree<T> UI(bool child = false);
 
-void Menu();
+void MenuTree();
+
+void Choose();
+void MenuHeap();
+
+template <typename T>
+Heap<T> UI_H(bool child);

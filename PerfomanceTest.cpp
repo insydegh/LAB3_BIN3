@@ -136,3 +136,35 @@ void Remove_tree_test() {
         fs << elapsed_ms.count() << ',' << i+1 << endl;
     }
 }
+
+
+void heap_add() {
+    fstream fs;
+    fs.open("heap_add.txt", fstream::in | fstream::out | fstream::app);
+    for(int i = 0; i < 500000; i++) {
+        Heap<int> heap =  Heap<int>();
+        auto begin = std::chrono::steady_clock::now();
+        for(int j = 0 ; j < i; j++)
+            heap.insertNode(j);
+        auto end = std::chrono::steady_clock::now();
+        auto elapsed_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+        fs << log2((elapsed_ms.count()+1000000000)*100000000) << ',' << i+1 << endl;
+    }
+}
+
+
+void heap_find() {
+    fstream fs;
+    fs.open("heap_find.txt", fstream::in | fstream::out | fstream::app);
+    for(int i = 0; i < 500000; i++) {
+        Heap<int> heap = Heap<int>();
+        for(int j = 0 ; j < i; j++)
+            heap.insertNode(j);
+        auto begin = std::chrono::steady_clock::now();
+        for (int j = 0; j<i; j++)
+            heap.find_array(j);
+        auto end = std::chrono::steady_clock::now();
+        auto elapsed_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+        fs << elapsed_ms.count() << ',' << i+1 << endl;
+    }
+}

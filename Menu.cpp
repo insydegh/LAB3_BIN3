@@ -155,7 +155,7 @@ BinTree<T> UI(bool child) {
 
 
 
-void Menu() {
+void MenuTree() {
     char command;
     //----------------------------------------------------------
     sep();
@@ -186,6 +186,126 @@ void Menu() {
 
     if (command == '4') {
         UI<complex<double>>();
+    }
+
+}
+
+
+
+template<typename T>
+Heap<T> UI_H(bool child) {
+    Heap<T> heap = Heap<T>();
+    while (true) {
+        //----------------------------------------------------------
+        {
+            sep();
+            cout << "Commands:\n";
+            cout << "	s - Show Heap\n";
+            cout << "	p - Show array\n";
+            cout << "	1 - Add\n";
+            cout << "	2 - Remove by number\n";
+            cout << "	3 - Remove by index\n";
+            cout << "	4 - Find\n";
+            cout << "	0 - exit\n";
+
+            sep();
+        }
+        //----------------------------------------------------------
+        char command;
+        std::cin >> command;
+        if (command == '0') {
+            break;
+        }
+        if (command == 's' || command == 'S') {
+            heap.printHeap();
+        }
+
+        if (command == 'p' || command == 'P') {
+            heap.PrintArray();
+        }
+        if (command == '1') {
+            int count;
+            cout<<"How many adds do you want?: ";
+            cin>>count;
+            for (int i=0; i<count; i++) {
+                T key;
+                std::cout << "input key: ";
+                std::cin >> key;
+                heap.insertNode(key);
+            }
+        }
+        if (command == '2') {
+            T key;
+            std::cout << "input element: ";
+            std::cin >> key;
+            heap.removeByNumber(key);
+        }
+        if (command == '3') {
+            int key;
+            std::cout << "input key: ";
+            std::cin >> key;
+            heap.removeByIndex(key);
+        }
+        if (command == '4') {
+            T key;
+            std::cout << "input key: ";
+            std::cin >> key;
+            if (heap.find_bool(key)==1) cout<<"Branch exist"<<endl;
+            else cout<<"Branch DO NOT exist"<<endl;
+        }
+    }
+    return heap;
+}
+
+
+
+
+void MenuHeap() {
+    char command;
+    //----------------------------------------------------------
+    sep();
+    std::cout << "Choose your type:\n";
+    std::cout << "	1 - int\n";
+    std::cout << "	2 - double\n";
+    std::cout << "	3 - string\n";
+    std::cout << "	4 - complex\n";
+    std::cout << "	0 - exit\n";
+    sep();
+    //----------------------------------------------------------
+
+    std::cin >> command;
+
+    if (command == '0') {
+        exit;
+    }
+    if (command == '1') {
+        UI_H<int>(false);
+    }
+    if (command == '2') {
+        UI_H<double>(false);
+    }
+
+    if (command == '3') {
+        UI_H<string>(false);
+    }
+
+    if (command == '4') {
+        UI_H<complex<double>>(false);
+    }
+
+}
+
+
+void Choose() {
+    cout<<"Heap - 1 or Tree - 0?"<<endl;
+    cout<<"Your choice: ";
+    char choice;
+    cin>>choice;
+    if (choice == '1') {
+        MenuHeap();
+    }
+    if (choice == '0') {
+        MenuTree();
     }
 
 }
